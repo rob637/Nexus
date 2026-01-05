@@ -86,7 +86,14 @@ export class Vehicle {
             },
             [
                 { axis: PhysicsConstraintAxis.LINEAR_X, minLimit: 0, maxLimit: 0 },
-                { axis: PhysicsConstraintAxis.LINEAR_Y, minLimit: 0, maxLimit: 0 },
+                // Suspension: Allow movement on Y axis with Spring properties
+                { 
+                    axis: PhysicsConstraintAxis.LINEAR_Y, 
+                    minLimit: -0.5, 
+                    maxLimit: 0.2,
+                    stiffness: 5000, // Spring Force
+                    damping: 200     // Shock Absorber
+                },
                 { axis: PhysicsConstraintAxis.LINEAR_Z, minLimit: 0, maxLimit: 0 },
                 { axis: PhysicsConstraintAxis.ANGULAR_Y, minLimit: 0, maxLimit: 0 }, // Lock steering for now
                 { axis: PhysicsConstraintAxis.ANGULAR_Z, minLimit: 0, maxLimit: 0 },

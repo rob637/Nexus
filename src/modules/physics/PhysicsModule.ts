@@ -29,8 +29,32 @@ export class PhysicsModule {
         this.vehicle = new Vehicle(this.scene);
         this.vehicle.build();
 
+        // Create Obstacles (The "Fun" Part)
+        this.createObstacles();
+
         // Simulate a "Snap" when loaded (Juice)
         HapticManager.triggerSnap();
+    }
+
+    private createObstacles() {
+        // 1. A Ramp
+        const ramp = MeshBuilder.CreateBox("ramp", { width: 10, height: 1, depth: 10 }, this.scene);
+        ramp.position.set(0, 1, 20);
+        ramp.rotation.x = -Math.PI / 8; // 22.5 degrees
+        const rampMat = new StandardMaterial("rampMat", this.scene);
+        rampMat.diffuseColor = Color3.Yellow();
+        ramp.material = rampMat;
+        new PhysicsAggregate(ramp, PhysicsShapeType.BOX, { mass: 0, friction: 1.0 }, this.scene);
+
+        // 2. Some crashable boxes
+        for (let i = 0; i < 5; i++) {
+            const box = MeshBuilder.CreateBox(`crashBox_${i}`, { size: 2 }, this.scene);
+            box.position.set(Math.random() * 10 - 5, 5 + i * 2, 40);
+            const boxMat = new StandardMaterial(`boxMat_${i}`, this.scene);
+            boxMat.diffuseColor = Color3.Red();
+            box.material = boxMat;
+            new PhysicsAggregate(box, PhysicsShapeType.BOX, { mass: 10, restitution: 0.5 }, this.scene);
+        }
     }
 
 
