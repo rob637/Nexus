@@ -1,4 +1,4 @@
-import { Scene, MeshBuilder, Vector3, StandardMaterial, Color3, Mesh, PhysicsAggregate, PhysicsShapeType, PhysicsMotionType, Physics6DoFConstraint, Axis, TransformNode, ActionManager, ExecuteCodeAction } from "@babylonjs/core";
+import { Scene, MeshBuilder, Vector3, StandardMaterial, Color3, Mesh, PhysicsAggregate, PhysicsShapeType, Physics6DoFConstraint, Axis } from "@babylonjs/core";
 
 export class Vehicle {
     private scene: Scene;
@@ -64,38 +64,6 @@ export class Vehicle {
         // Fix rotation for physics shape if needed (Cylinder shape orientation matches mesh)
         this.wheelAggregates.push(wheelAgg);
 
-        // Simple Hinge Joint for now (Wheel spins around X axis relative to chassis)
-        // In a full simulation we use 6DoF for suspension, but let's start with a rigid axle to ensure stability first.
-        // Actually, let's use a Hinge Joint which allows rotation on one axis.
-        
-        // NOTE: For a proper car we need suspension. Let's stick to the "Magic Force" method for the MVP
-        // where we push the chassis, but let the wheels roll freely.
-        // We will attach wheels with a Hinge Joint to the chassis.
-        
-        const joint = new Physics6DoFConstraint(
-            {
-                pivotA: position,
-                pivotB: Vector3.Zero(),
-                axisA: Axis.X,
-                axisB: Axis.X,
-                perpAxisA: Axis.Y,
-                perpAxisB: Axis.Y,
-            },
-            [
-                // Lock Translation (Rigid Axle for MVP)
-                { axis: Physics6DoFConstraint.TRANSLATION_X, minLimit: 0, maxLimit: 0 },
-                { axis: Physics6DoFConstraint.TRANSLATION_Y, minLimit: 0, maxLimit: 0 },
-                { axis: Physics6DoFConstraint.TRANSLATION_Z, minLimit: 0, maxLimit: 0 },
-                // Free Rotation on X (Rolling)
-                { axis: Physics6DoFConstraint.ROTATION_X, minLimit: 0, maxLimit: 0 }, // 0,0 means free? No, usually null or specific setting. 
-                // In Babylon Havok, limits are tricky. Let's try a simpler approach:
-                // Just lock everything EXCEPT Rotation X.
-            ],
-            this.scene
-        );
-        // Actually, let's just use a simple Hinge for now.
-        // Re-writing constraint logic in next step if this is too complex.
-        
         // For this MVP, let's just weld them so they don't fall off, and slide the car.
         // We will upgrade to real wheels in the next prompt.
         
@@ -109,11 +77,11 @@ export class Vehicle {
                 perpAxisB: Axis.Y,
             },
             [
-                { axis: Physics6DoFConstraint.TRANSLATION_X, minLimit: 0, maxLimit: 0 },
-                { axis: Physics6DoFConstraint.TRANSLATION_Y, minLimit: 0, maxLimit: 0 },
-                { axis: Physics6DoFConstraint.TRANSLATION_Z, minLimit: 0, maxLimit: 0 },
-                { axis: Physics6DoFConstraint.ROTATION_Y, minLimit: 0, maxLimit: 0 },
-                { axis: Physics6DoFConstraint.ROTATION_Z, minLimit: 0, maxLimit: 0 },
+                { axis: Physics6DoFConstraint.TranslationX, minLimit: 0, maxLimit: 0 },
+                { axis: Physics6DoFConstraint.TranslationY, minLimit: 0, maxLimit: 0 },
+                { axis: Physics6DoFConstraint.TranslationZ, minLimit: 0, maxLimit: 0 },
+                { axis: Physics6DoFConstraint.RotationY, minLimit: 0, maxLimit: 0 },
+                { axis: Physics6DoFConstraint.RotationZ, minLimit: 0, maxLimit: 0 },
             ],
             this.scene
         );
