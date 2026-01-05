@@ -35,10 +35,11 @@ export class Vehicle {
         );
 
         // 2. Create Wheels
-        this.createWheel(new Vector3(-1.2, -0.5, 1.5), "wheel_FL"); // Front Left
-        this.createWheel(new Vector3(1.2, -0.5, 1.5), "wheel_FR");  // Front Right
-        this.createWheel(new Vector3(-1.2, -0.5, -1.5), "wheel_RL"); // Rear Left
-        this.createWheel(new Vector3(1.2, -0.5, -1.5), "wheel_RR");  // Rear Right
+        // Lowered Y to -1.0 to ensure wheels clear the chassis (avoiding self-collision which pops them up)
+        this.createWheel(new Vector3(-1.2, -1.0, 1.5), "wheel_FL"); // Front Left
+        this.createWheel(new Vector3(1.2, -1.0, 1.5), "wheel_FR");  // Front Right
+        this.createWheel(new Vector3(-1.2, -1.0, -1.5), "wheel_RL"); // Rear Left
+        this.createWheel(new Vector3(1.2, -1.0, -1.5), "wheel_RR");  // Rear Right
 
         // 3. Setup Input Handling
         this.setupInputs();
