@@ -110,17 +110,26 @@ export class Vehicle {
             const forward = this.chassis.forward;
             
             // Simple Arcade Physics: Apply force to center of mass
+            // Mass = 200. Friction ~ 0.8. Need significant force to move.
+            const power = 100; // Increased from 5
+            const turnSpeed = 0.1;
+
             if (this.inputMap["w"]) {
-                this.chassisAggregate.body.applyImpulse(forward.scale(5), this.chassis.getAbsolutePosition());
+                this.chassisAggregate.body.applyImpulse(forward.scale(power), this.chassis.getAbsolutePosition());
             }
             if (this.inputMap["s"]) {
-                this.chassisAggregate.body.applyImpulse(forward.scale(-5), this.chassis.getAbsolutePosition());
+                this.chassisAggregate.body.applyImpulse(forward.scale(-power), this.chassis.getAbsolutePosition());
             }
             if (this.inputMap["a"]) {
-                this.chassisAggregate.body.setAngularVelocity(this.chassisAggregate.body.getAngularVelocity().add(new Vector3(0, -0.05, 0)));
+                this.chassisAggregate.body.setAngularVelocity(this.chassisAggregate.body.getAngularVelocity().add(new Vector3(0, -turnSpeed, 0)));
             }
             if (this.inputMap["d"]) {
-                this.chassisAggregate.body.setAngularVelocity(this.chassisAggregate.body.getAngularVelocity().add(new Vector3(0, 0.05, 0)));
+                this.chassisAggregate.body.setAngularVelocity(this.chassisAggregate.body.getAngularVelocity().add(new Vector3(0, turnSpeed, 0)));
+            }
+            
+            // Debug Input
+            if (this.inputMap["w"] || this.inputMap["s"] || this.inputMap["a"] || this.inputMap["d"]) {
+                // console.log("Input detected", this.inputMap);
             }
         });
     }
