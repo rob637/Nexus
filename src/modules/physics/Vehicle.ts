@@ -1,4 +1,4 @@
-import { Scene, MeshBuilder, Vector3, StandardMaterial, Color3, Mesh, PhysicsAggregate, PhysicsShapeType, Physics6DoFConstraint, Axis } from "@babylonjs/core";
+import { Scene, MeshBuilder, Vector3, StandardMaterial, Color3, Mesh, PhysicsAggregate, PhysicsShapeType, Physics6DoFConstraint, Axis, PhysicsConstraintAxis } from "@babylonjs/core";
 
 export class Vehicle {
     private scene: Scene;
@@ -77,11 +77,11 @@ export class Vehicle {
                 perpAxisB: Axis.Y,
             },
             [
-                { axis: Physics6DoFConstraint.TranslationX, minLimit: 0, maxLimit: 0 },
-                { axis: Physics6DoFConstraint.TranslationY, minLimit: 0, maxLimit: 0 },
-                { axis: Physics6DoFConstraint.TranslationZ, minLimit: 0, maxLimit: 0 },
-                { axis: Physics6DoFConstraint.RotationY, minLimit: 0, maxLimit: 0 },
-                { axis: Physics6DoFConstraint.RotationZ, minLimit: 0, maxLimit: 0 },
+                { axis: PhysicsConstraintAxis.LINEAR_X, minLimit: 0, maxLimit: 0 },
+                { axis: PhysicsConstraintAxis.LINEAR_Y, minLimit: 0, maxLimit: 0 },
+                { axis: PhysicsConstraintAxis.LINEAR_Z, minLimit: 0, maxLimit: 0 },
+                { axis: PhysicsConstraintAxis.ANGULAR_Y, minLimit: 0, maxLimit: 0 },
+                { axis: PhysicsConstraintAxis.ANGULAR_Z, minLimit: 0, maxLimit: 0 },
             ],
             this.scene
         );
