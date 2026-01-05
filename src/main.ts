@@ -26,9 +26,18 @@ async function initApp() {
             startBtn.style.cursor = "pointer";
             startBtn.style.fontSize = "16px";
             
-            startBtn.onclick = () => {
-                dashboard.loadModule(ScienceSector.PHYSICS);
-                startBtn.style.display = "none";
+            startBtn.onclick = async () => {
+                try {
+                    startBtn.innerText = "INITIALIZING...";
+                    startBtn.style.cursor = "wait";
+                    await dashboard.loadModule(ScienceSector.PHYSICS);
+                    startBtn.style.display = "none";
+                } catch (err) {
+                    console.error("Module Load Failed:", err);
+                    startBtn.innerText = "SYSTEM FAILURE";
+                    startBtn.style.background = "var(--brand-warning)";
+                    alert("Error loading Physics Module. Please refresh and try again.\n\nDetails: " + err);
+                }
             };
 
             uiLayer.appendChild(startBtn);

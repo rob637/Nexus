@@ -42,6 +42,7 @@ export class MotusEngine {
             console.log("Motus99: Havok Physics Initialized");
         } catch (e) {
             console.error("Motus99: Failed to initialize Havok Physics", e);
+            throw new Error("Physics Engine Initialization Failed");
         }
 
         // Basic Lighting
