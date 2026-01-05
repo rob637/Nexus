@@ -1,4 +1,4 @@
-import { Engine, Scene, Vector3, Color3, Color4, HemisphericLight, ArcRotateCamera, WebGPUEngine } from "@babylonjs/core";
+import { Engine, Scene, Vector3, Color3, Color4, HemisphericLight, DirectionalLight, ArcRotateCamera, WebGPUEngine } from "@babylonjs/core";
 import HavokPhysics from "@babylonjs/havok";
 import { HavokPlugin } from "@babylonjs/core/Physics/v2/Plugins/havokPlugin";
 
@@ -50,7 +50,7 @@ export class MotusEngine {
         light.intensity = 0.9;
         
         // Directional Light for Shadows/Depth
-        const dirLight = new (window as any).BABYLON.DirectionalLight("dirLight", new Vector3(-1, -2, -1), this.scene);
+        const dirLight = new DirectionalLight("dirLight", new Vector3(-1, -2, -1), this.scene);
         dirLight.intensity = 0.5;
 
         // Basic Camera (Cinematic feel)
