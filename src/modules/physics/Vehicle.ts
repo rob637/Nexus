@@ -50,6 +50,13 @@ export class Vehicle {
         wheel.rotation.z = Math.PI / 2; // Rotate to face correct way
         wheel.material = this.getWheelMaterial();
         
+        // Add Hubcap to make rotation visible
+        const hubcap = MeshBuilder.CreateCylinder(name + "_hub", { diameter: 0.6, height: 0.51, tessellation: 16 }, this.scene);
+        hubcap.parent = wheel;
+        const hubMat = new StandardMaterial("hubMat", this.scene);
+        hubMat.diffuseColor = Color3.FromHexString("#cccccc"); // Silver
+        hubcap.material = hubMat;
+        
         wheel.position = this.chassis.position.add(position);
         this.wheels.push(wheel);
 

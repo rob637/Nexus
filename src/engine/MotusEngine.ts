@@ -32,7 +32,7 @@ export class MotusEngine {
         }
 
         this.scene = new Scene(this.engine);
-        this.scene.clearColor = new Color4(0.04, 0.04, 0.05, 1); // Deep Obsidian #0a0a0c
+        this.scene.clearColor = new Color4(0.1, 0.1, 0.15, 1); // Lighter Slate Blue/Grey
 
         // Initialize Havok Physics
         try {
@@ -47,7 +47,11 @@ export class MotusEngine {
 
         // Basic Lighting
         const light = new HemisphericLight("light", new Vector3(0, 1, 0), this.scene);
-        light.intensity = 0.7;
+        light.intensity = 0.9;
+        
+        // Directional Light for Shadows/Depth
+        const dirLight = new (window as any).BABYLON.DirectionalLight("dirLight", new Vector3(-1, -2, -1), this.scene);
+        dirLight.intensity = 0.5;
 
         // Basic Camera (Cinematic feel)
         const camera = new ArcRotateCamera("camera", -Math.PI / 2, Math.PI / 2.5, 10, Vector3.Zero(), this.scene);

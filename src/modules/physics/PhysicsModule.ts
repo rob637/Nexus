@@ -18,9 +18,24 @@ export class PhysicsModule {
         // Create the "Floor" (The Hangar)
         const ground = MeshBuilder.CreateGround("ground", {width: 100, height: 100}, this.scene);
         const groundMat = new StandardMaterial("groundMat", this.scene);
-        groundMat.diffuseColor = Color3.FromHexString("#1a1a1a"); // Dark industrial floor
-        groundMat.specularColor = new Color3(0.2, 0.2, 0.2); // Slight reflection
-        ground.material = groundMat;
+        groundMat.diffuseColor = Color3.FromHexString("#2a2a35"); // Lighter industrial floor
+        groundMat.specularColor = new Color3(0.1, 0.1, 0.1); 
+        
+        // Create a grid texture for better motion perception
+        const gridTexture = new (window as any).BABYLON.GridMaterial("gridMat", this.scene);
+        gridTexture.mainColor = Color3.FromHexString("#3a3a45");
+        gridTexture.lineColor = Color3.FromHexString("#00f2ff");
+        gridTexture.majorUnitFrequency = 5;
+        gridTexture.minorUnitVisibility = 0.3;
+        gridTexture.gridRatio = 2;
+        gridTexture.opacity = 0.8;
+        
+        // Use Grid Material if available, else fallback to standard
+        if ((window as any).BABYLON.GridMaterial) {
+             ground.material = gridTexture;
+        } else {
+             ground.material = groundMat;
+        }
         
         // V2 Physics: Aggregate for Static Ground
         new PhysicsAggregate(ground, PhysicsShapeType.BOX, { mass: 0, restitution: 0.5, friction: 0.8 }, this.scene);
