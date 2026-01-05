@@ -13,9 +13,9 @@ export class MotusEngine {
         if (!this.canvas) {
             throw new Error("Canvas not found");
         }
-        // Placeholder for engine initialization, will be set in init()
-        this.engine = new Engine(this.canvas, true); 
-        this.scene = new Scene(this.engine);
+        // Engine will be initialized in init()
+        this.engine = null as any; 
+        this.scene = null as any;
     }
 
     public async init() {
