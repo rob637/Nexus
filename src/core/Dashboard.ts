@@ -1,4 +1,4 @@
-import { Scene, MeshBuilder, Vector3, StandardMaterial, Color3, Animation, Mesh } from "@babylonjs/core";
+import { Scene, MeshBuilder, StandardMaterial, Color3, Animation, Mesh } from "@babylonjs/core";
 import { PhysicsModule } from "../modules/physics/PhysicsModule";
 
 export enum ScienceSector {

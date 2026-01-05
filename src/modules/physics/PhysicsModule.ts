@@ -1,4 +1,4 @@
-import { Scene, MeshBuilder, Vector3, StandardMaterial, Color3, Mesh } from "@babylonjs/core";
+import { Scene, MeshBuilder, StandardMaterial, Color3, Mesh } from "@babylonjs/core";
 import { HapticManager } from "../../utils/HapticManager";
 
 export class PhysicsModule {

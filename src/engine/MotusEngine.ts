@@ -1,4 +1,4 @@
-import { Engine, Scene, Vector3, Color3, Color4, HemisphericLight, ArcRotateCamera, MeshBuilder, WebGPUEngine } from "@babylonjs/core";
+import { Engine, Scene, Vector3, Color3, Color4, HemisphericLight, ArcRotateCamera, WebGPUEngine } from "@babylonjs/core";
 import HavokPhysics from "@babylonjs/havok";
 import { HavokPlugin } from "@babylonjs/core/Physics/v2/Plugins/havokPlugin";
 
