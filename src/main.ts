@@ -25,6 +25,7 @@ async function initApp() {
             startBtn.style.fontWeight = "bold";
             startBtn.style.cursor = "pointer";
             startBtn.style.fontSize = "16px";
+            startBtn.style.pointerEvents = "auto"; // Enable clicks on the button
             
             startBtn.onclick = async () => {
                 try {
