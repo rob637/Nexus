@@ -79,15 +79,15 @@ export class Vehicle {
                 pivotA: position,
                 pivotB: Vector3.Zero(),
                 axisA: Axis.X,
-                axisB: Axis.X,
+                axisB: Axis.Y, // Wheel spins around its Y axis (Cylinder height)
                 perpAxisA: Axis.Y,
-                perpAxisB: Axis.Y,
+                perpAxisB: Axis.X, // Perpendicular to Y
             },
             [
                 { axis: PhysicsConstraintAxis.LINEAR_X, minLimit: 0, maxLimit: 0 },
                 { axis: PhysicsConstraintAxis.LINEAR_Y, minLimit: 0, maxLimit: 0 },
                 { axis: PhysicsConstraintAxis.LINEAR_Z, minLimit: 0, maxLimit: 0 },
-                { axis: PhysicsConstraintAxis.ANGULAR_Y, minLimit: 0, maxLimit: 0 },
+                { axis: PhysicsConstraintAxis.ANGULAR_Y, minLimit: 0, maxLimit: 0 }, // Lock steering for now
                 { axis: PhysicsConstraintAxis.ANGULAR_Z, minLimit: 0, maxLimit: 0 },
             ],
             this.scene
