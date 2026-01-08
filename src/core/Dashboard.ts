@@ -1,10 +1,12 @@
 import { Scene, MeshBuilder, StandardMaterial, Color3, Animation, Mesh } from "@babylonjs/core";
 import { PhysicsModule } from "../modules/physics/PhysicsModule";
+import { CutTheRopeGame } from "../modules/physics/CutTheRopeGame";
 
 export enum ScienceSector {
     PHYSICS = "physics",
     CHEMISTRY = "chemistry",
-    ASTRONOMY = "astronomy"
+    ASTRONOMY = "astronomy",
+    CUT_THE_ROPE = "cut_the_rope"
 }
 
 export class Dashboard {
@@ -44,6 +46,9 @@ export class Dashboard {
         // Load Module
         if (sector === ScienceSector.PHYSICS) {
             this.currentModule = new PhysicsModule(this.scene);
+            this.currentModule.load();
+        } else if (sector === ScienceSector.CUT_THE_ROPE) {
+            this.currentModule = new CutTheRopeGame(this.scene);
             this.currentModule.load();
         }
         // Add other modules here
